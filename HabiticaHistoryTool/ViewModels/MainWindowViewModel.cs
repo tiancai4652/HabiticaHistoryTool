@@ -77,11 +77,10 @@ namespace HabiticaHistoryTool.ViewModels
             {
                 try
                 {
-                    // 尝试获取JSON数据
+                    
                     string jsonData = await Base.FetchHabiticaData(APIURL,UserName,UserToken);
                     JObject user_data = JObject.Parse(jsonData);
 
-                    // 解析并输出已完成的todos
                     Base.GetCompletedTodos(user_data, out List<HabiData> todos, out List<HabiData> habits, out List<HabiData> dailys);
                     var todosSource = todos;
                     var habitsSource = habits;
@@ -90,8 +89,8 @@ namespace HabiticaHistoryTool.ViewModels
                     var todoAdd= todos.Except(TodosSource, new IdComparer()).Count();
                     var habitAdd = habitsSource.Except(HabitsSource, new IdComparer()).Count();
                     var dailyAdd = dailys.Except(DailySource,new IdComparer()).Count();
-                   
-                    Msg= @"已更新待办事项数:" + todoAdd + "  已更新习惯数:" + habitAdd + "  已更新日报数:" + dailyAdd;
+
+                    Msg = "Updated to-dos: " + todoAdd + "  Updated habits: " + habitAdd + "  Updated daily reports: " + dailyAdd;
 
                     TodosSource = todos;
                     HabitsSource = habits;
