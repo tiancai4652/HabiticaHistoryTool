@@ -47,7 +47,7 @@ namespace HabiticaHistoryTool.ViewModels
                 {
                     // 输出已完成的待办事项的详细信息
                     //completedTodos.Add($"ID: {todo["id"].ToString()}, Text: {todo["text"]}");
-                    todos.Add(new HabiData() { ID = todo["id"].ToString(), Name = todo["text"].ToString(), CreatedDate= todo["createdAt"].ToString(),UpdateDate= todo["updatedAt"].ToString() });
+                    todos.Add(new HabiData() { ID = todo["id"].ToString(), Name = todo["text"].ToString(), CreatedDate= DateTime.Parse( todo["createdAt"].ToString()),UpdateDate= DateTime.Parse(todo["updatedAt"].ToString()) });
                 }
             }
             todos = todos.OrderByDescending(x => x.UpdateDate).ToList();
@@ -57,7 +57,7 @@ namespace HabiticaHistoryTool.ViewModels
             todosArray = (JArray)userData["tasks"]["habits"];
             foreach (JObject todo in todosArray)
             {
-                habits.Add(new HabiData() { ID = todo["id"].ToString(), Name = todo["text"].ToString(),CreatedDate = todo["createdAt"].ToString(), UpdateDate = todo["updatedAt"].ToString() });
+                habits.Add(new HabiData() { ID = todo["id"].ToString(), Name = todo["text"].ToString(),CreatedDate = DateTime.Parse(todo["createdAt"].ToString()), UpdateDate = DateTime.Parse(todo["updatedAt"].ToString()) });
             }
             habits= habits.OrderByDescending(x => x.UpdateDate).ToList();
 
@@ -98,8 +98,8 @@ namespace HabiticaHistoryTool.ViewModels
         public string ID { get; set; }
         public string Name { get; set; }
 
-        public string CreatedDate { get; set; }
-        public string UpdateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 
     public class IdComparer : IEqualityComparer<HabiData>
