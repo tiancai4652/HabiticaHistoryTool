@@ -11,7 +11,7 @@ namespace HabiticaHistoryTool.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string _title = "Habitica Task Data Preservation Tool";
         public string Title
         {
             get { return _title; }
